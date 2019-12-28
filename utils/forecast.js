@@ -12,13 +12,14 @@ const request = require('request');
 
 const forecast = (lat,log, callback)=>{
   url = 'https://api.darksky.net/forecast/8a0ababc84fc0ca5d8182a5fa7d59924/'+lat+','+log;
-  request({url:url,json:true},(error,response)=>{
+
+  request({url,json:true},(error,{body})=>{
     if(error){
       callback('No internet connection',undefined);
-    } else if (response.body.error) {
+    } else if (body.error) {
       callback('Invalid location',undefined);
     } else {
-      callback(undefined,response.body.currently);
+      callback(undefined,body.currently);
     }
   });
 }
