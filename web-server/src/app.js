@@ -3,7 +3,7 @@ const app = express();
 
 app.get('/weather',(req,res)=>{
   res.json({
-    location:'gonda',
+    location:'Gonda, U.P, India',
     temp:1
   });
 });

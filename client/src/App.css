@@ -13,6 +13,18 @@
   }
 }
 
+.title {
+  margin-left: 100px;
+  margin-top: 50px;
+  margin-right: 100px;
+}
+
+.foot {
+  position: absolute;
+  bottom: 50px;
+  color: rgb(169, 175, 157)
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
