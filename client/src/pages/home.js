@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 class Home extends React.Component{
 
 
@@ -14,6 +14,21 @@ class Home extends React.Component{
       fetch('/weather')
         .then(res=>res.json())
         .then(weather=>this.setState({weather}));
+
+        axios.post('http://localhost:5000/weather',{search:'games'}).then(() => console.log('Post send'))
+      .catch(err => {
+        console.error(err);
+      });
+
+        // fetch('/weather' , {
+        //   method: "POST",
+        //   headers: {
+        //     'Content-type': 'applicatin/json'
+        //   },
+        //   body: JSON.stringify({search:'games'})
+        // })
+        // .then((result) => result.json())
+        // .then((info) => { console.log(info); })
     }
 
 
