@@ -21,21 +21,23 @@ class Home extends React.Component{
 
     onSubmit=  (event)=>{
       event.preventDefault();
-      this.setState({loading:true})
-    fetch('http://localhost:5000/weather', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({address:this.state.location}),
-          }).then((res)=>res.json()).then((data)=>{
-            console.log(data)
-            this.setState({weather:data,loading:false});
-          }).catch(err=>{
-            this.setState({loading:false});
-          })
 
+      if(!!this.state.location){
+        this.setState({loading:true})
+        fetch('http://localhost:5000/weather', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({address:this.state.location}),
+            }).then((res)=>res.json()).then((data)=>{
+              console.log(data)
+              this.setState({weather:data,loading:false});
+            }).catch(err=>{
+              this.setState({loading:false});
+            })
+        }
 
     }
 
@@ -48,7 +50,7 @@ class Home extends React.Component{
           <Form.Input label='Location' placeholder='Enter location you want to search' onChange={(event)=>{
               this.setState({location:event.target.value})
             }} />
-          <Button onClick={this.onSubmit}>Submit</Button>
+          <Button onClick={this.onSubmit} primary>Submit</Button>
         </Form>
         <div className="s">
         <h4>

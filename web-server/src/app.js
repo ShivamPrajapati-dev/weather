@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser')
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
-
+const path = require('path');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -15,6 +15,7 @@ app.use(
   })
 );
 
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 app.post('/weather',(req,res)=>{
@@ -42,10 +43,15 @@ app.post('/weather',(req,res)=>{
   }
 
 
-})
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+
+const port = process.env.PORT || 5000;
 
 
-
-app.listen('5000',()=>{
+app.listen(port,()=>{
   console.log('listening on post 5000');
 });
