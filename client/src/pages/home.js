@@ -15,7 +15,7 @@ class Home extends React.Component{
         .then(res=>res.json())
         .then(weather=>this.setState({weather}));
 
-        axios.post('http://localhost:5000/weather',{search:'games'}).then(() => console.log('Post send'))
+        axios.post('http://localhost:5000/weather',null,{params:{address:'India '}}).then(() => console.log('Post send'))
       .catch(err => {
         console.error(err);
       });
