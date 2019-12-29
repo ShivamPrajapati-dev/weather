@@ -7,7 +7,7 @@ class About extends React.Component{
           marginTop:'50px'
         }}>
       <h1>
-        About
+        Hello, This app was created by Shivam Prajapati
       </h1>
       </div>
     );

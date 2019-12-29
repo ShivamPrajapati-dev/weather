@@ -46,7 +46,7 @@ class App extends React.Component{
         </div>
       </Router>
 
-      <h3 className="foot">Created by Shivam Prajapati</h3>
+      <h6 className="foot">Created by Shivam Prajapati</h6>
     </div>
   );
 }

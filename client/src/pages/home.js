@@ -1,46 +1,62 @@
 import React from 'react';
 import axios from 'axios';
+import { Button, Form } from 'semantic-ui-react'
+
 class Home extends React.Component{
 
 
     constructor(props){
       super(props);
       this.state = {
-        weather:{}
+        weather:{},
+        location:'',
+        loading:false
       }
     }
 
-    componentDidMount(){
-      fetch('/weather')
-        .then(res=>res.json())
-        .then(weather=>this.setState({weather}));
-
-        axios.post('http://localhost:5000/weather',null,{params:{address:'India '}}).then(() => console.log('Post send'))
-      .catch(err => {
-        console.error(err);
-      });
-
-        // fetch('/weather' , {
-        //   method: "POST",
-        //   headers: {
-        //     'Content-type': 'applicatin/json'
-        //   },
-        //   body: JSON.stringify({search:'games'})
-        // })
-        // .then((result) => result.json())
-        // .then((info) => { console.log(info); })
+    componentDidMount()
+    {
+      fetch('')
     }
 
+    onSubmit=  (event)=>{
+      event.preventDefault();
+      this.setState({loading:true})
+    fetch('http://localhost:5000/weather', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({address:this.state.location}),
+          }).then((res)=>res.json()).then((data)=>{
+            console.log(data)
+            this.setState({weather:data,loading:false});
+          }).catch(err=>{
+            this.setState({loading:false});
+          })
+
+
+    }
 
   render() {
     return (
       <div style={{
           marginTop:'50px'
         }}>
-      <h1>
-        Home
-        <h1>{this.state.weather.location}</h1>
-      </h1>
+        <Form loading={this.state.loading}>
+          <Form.Input label='Location' placeholder='Enter location you want to search' onChange={(event)=>{
+              this.setState({location:event.target.value})
+            }} />
+          <Button onClick={this.onSubmit}>Submit</Button>
+        </Form>
+        <div className="s">
+        <h4>
+          {this.state.weather.place}
+        </h4>
+        <h4>{this.state.weather.summary}</h4>
+        <h5>{this.state.weather.temp}</h5>
+      </div>
     </div>
     );
   }

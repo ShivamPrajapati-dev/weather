@@ -12,7 +12,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.s{
+  margin-top: 50px;
+  color: rgb(29, 78, 182);
+}
 .title {
   margin-left: 100px;
   margin-top: 50px;

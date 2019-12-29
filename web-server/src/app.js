@@ -15,17 +15,14 @@ app.use(
   })
 );
 
-app.get('/weather',(req,res)=>{
-  res.json({
-    location:'Gonda, U.P, India',
-    temp:1
-  });
-});
+
+
 app.post('/weather',(req,res)=>{
 
-  if(req.query.address){
 
-    geocode(req.query.address,(error,data)=>{
+  if(req&&req.body.address){
+
+    geocode(req.body.address,(error,data)=>{
       if(error){
         return console.log(error);
       }
@@ -35,13 +32,19 @@ app.post('/weather',(req,res)=>{
         if(error){
           return console.log(error);
         }
+
         console.log(data);
         console.log(forcastData)
+        res.status(200).send({place:data.place,summary:forcastData.summary,temp:forcastData.temperature+'F'});
+
       })
     });
   }
 
+
 })
+
+
 
 app.listen('5000',()=>{
   console.log('listening on post 5000');
