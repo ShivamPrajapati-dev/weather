@@ -24,7 +24,7 @@ class Home extends React.Component{
 
       if(!!this.state.location){
         this.setState({loading:true})
-        fetch('http://localhost:5000/weather', {
+        fetch('/weather', {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
